@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Make a pixel perfect site from an image</title>
+    <link rel="stylesheet" href="css/master.css">
+    <script type="text/javascript" src="js/master.js"></script>
+  </head>
+  <body>
+    <img id="design" src="design.png" alt="web page design">
+    <div id="container">
+    </div>
+    <div class="tools">
+      <form class="" action="index.html" method="post">
+        <label for="">Resize width in %</label>
+        <input type="range" id="width" name="points" min="0" max="1500" step="1" oninput="resizeWidth()">
+        <br/>
+        <label for="">Resize height in %</label>
+        <input type="range" id="height" name="points" min="0" max="1500" step=1 oninput="resizeHeight()">
+        <br/>
+        <label for="">Margin px</label>
+        <input type="range" id="margin" name="points" min="0" max="100px" step="1" oninput="resizePadding()">
+      </form>
+    </div>
+  </body>
+</html>
