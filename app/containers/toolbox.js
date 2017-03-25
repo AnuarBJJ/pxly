@@ -13,10 +13,34 @@ const style = {
 }
 
 const Toolbox = React.createClass({
+  componentWillMount(){
+    this.element = document.getElementById('neo') ? document.getElementById('neo') : null;
+  },
   handleOnChange(e){
-    const element = document.getElementById(this.props.active_element)
-    console.log(element)
-    element.style.fontSize = e.target.value + "px";
+    e.preventDefault();
+    console.log(this.props);
+    this.element = document.getElementById('neo');
+    this.element.style.fontSize = e.target.value + "px";
+  },
+  addDiv(e){
+    e.preventDefault();
+    // console.log(this.element)
+    this.element = document.getElementById('neo');
+    const child = document.createElement("DIV");
+    const parent = this.element;
+    parent.appendChild(child);
+    // const hltd = document.getElementsByClassName('heighlight');
+    // for(var i=0; i<hltd.length; i++){
+    //   var el = hltd[i];
+    //   if(el.classList.contains('heighlight')){
+    //     el.classList.remove('heighlight')
+    //   }
+    // }
+    parent.id = ''
+    child.id = 'neo';
+    child.style.height = '20px';
+    this.element = child;
+    // this.props()
   },
   render(){
     return (
@@ -30,6 +54,8 @@ const Toolbox = React.createClass({
           <br/>
           <label htmlFor="">Margin px</label>
           <input type="range" id="margin" name="points" min="0" max="100px" step="1" />
+          <label htmlFor="">Add div</label>
+          <button onClick={this.addDiv}>Add DIV </button>
         </form>
       </div>
     );
@@ -37,12 +63,7 @@ const Toolbox = React.createClass({
 })
 
 function mapStateToProps(state){
-  return state.Element
+  return state.Element;
 }
 
-export default connect (mapStateToProps)(Toolbox)
-/* spare parts
-	onInput={resizeWidth()}
-	onInput={resizeHeight()}
-	onInput={resizePadding()}
-*/
+export default connect (mapStateToProps)(Toolbox);

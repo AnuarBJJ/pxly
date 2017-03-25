@@ -44,3 +44,9 @@ document.addEventListener('click', function(e){
   self.state.target.className = 'heighlight';
 
 }, false);
+
+/* spare parts
+	onInput={resizeWidth()}
+	onInput={resizeHeight()}
+	onInput={resizePadding()}
+*/

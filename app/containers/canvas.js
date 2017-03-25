@@ -10,9 +10,14 @@ let store = createStore(canvasData);
 
 const Canvas = React.createClass ({
 	handleClick(e){
-		const target = e.target.id
-		const t = target.substring(0,target.length)
-		this.props.dispatch(setActive(t))
+		const lastNeo = document.getElementById('neo');
+		if(lastNeo){
+			lastNeo.id = ''
+		}
+		const target = e.target.id;
+		e.target.id = 'neo';
+		// const t = target.substring(0,target.length);
+		// this.props.dispatch(setActive(t));
 	},
 	render(){
 		return (
