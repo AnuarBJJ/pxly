@@ -1,56 +1,36 @@
 import React, {Component} from 'react';
+// import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { connect } from 'react-redux';
 
-export default class Canvas extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			taget: null
-		}
-	}
-	componentWillMount(){
-		let self = this;
-		document.addEventListener('click', function(e){
+import {setActive} from '../actions'
+import canvasData from '../reducers'
 
-		  e = e || window.event;
+let store = createStore(canvasData);
 
-		  if(e.target.id === 'tools' || e.target.parentElement.id === 'tools' || e.target.parentElement.parentElement.id === 'tools'){
-		    return
-		  }
-		  self.setState({
-		  	target: e.target || e.srcElement
-		  })
-
-		  var hltd = document.getElementsByClassName('heighlight');
-		  for(var i=0; i<hltd.length; i++){
-		    var el = hltd[i];
-		    if(el.classList.contains('heighlight')){
-		      el.classList.remove('heighlight')
-		    }
-		  }
-		  self.state.target.className = 'heighlight';
-		  console.log(self.state.target)
-
-		}, false);
-	}
+const Canvas = React.createClass ({
+	handleClick(e){
+		const target = e.target.id
+		const t = target.substring(0,target.length)
+		this.props.dispatch(setActive(t))
+	},
 	render(){
 		return (
-			<div>Some text</div>
+			<div id='container' onClick={this.handleClick}>{this.props.element}</div>
 		)
+	}
+})
+
+function mapStateToProps(state){
+	return {
+		element: state.Element.active_element
 	}
 }
 
-/* spare parts
-		function resizeWidth(){
-		  var x = document.getElementById("width").value;
-		  target.style.width = x + "px";
-		}
+const mapDispatchToProps = (dispatch) => {
+  return {
+		dispatch: dispatch
+  }
+}
 
-		function resizeHeight(){
-		  var y = document.getElementById("height").value;
-		  target.style.height = y + "px";
-		}
-		function resizePadding(){
-		  var z = document.getElementById("margin").value;
-		  target.style.margin = z + "px";
-		}
-*/
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
